@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carga de Archivo CSV</title>
+    <link rel="stylesheet" href="../static/stylesindex.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Carga de Archivo CSV</h1>
+        <form id="FormularioCarga" action="/upload" method="post" enctype="multipart/form-data">
+            <label for="file">Seleccionar archivo CSV</label>
+            <input id="file" type="file" name="file" accept=".csv">
+            <div class="confirmation-message" id="MensajeConfirmatorio">Archivo cargado correctamente</div>
+            <button type="submit">Cargar archivo</button>
+    </form>
+    </div>
+    <script src="..\static\ScriptdDeSeleccion.js"></script>
+</body>
+</html>

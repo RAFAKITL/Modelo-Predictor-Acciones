@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="static/Graficar.js"></script>
+    <title>Resultados</title>
+    <link rel="stylesheet" href="../static/stylesResults.css">
+</head>
+<body>
+    <div id="Grafico"></div>
+
+    <div id="PrediccionArbol">
+        <h1> Dato predicho (ArbolesDeDecisión) = {{arbolPrediccion}}</h1>
+    </div>
+
+    <div id="PrediccionSVM">
+        <h1> Dato predicho (SVM) = {{SVMPrediccion}}</h1>
+    </div>
+
+    <h1> Datos Ordenados </h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                {% for header in csv_data[0] %}
+                    <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in csv_data[1:] %}
+                <tr>
+                    {% for cell in row %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

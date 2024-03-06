@@ -1,0 +1,25 @@
+body {
+    background: linear-gradient(to bottom, darkblue, lightblue);
+    color: white;
+    font-family: Arial, sans-serif;
+}
+.sidebar {
+    width: 30%;
+    float: left;
+    padding: 10px;
+}
+.main {
+    width: 70%;
+    float: right;
+    padding: 10px;
+}
+button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
