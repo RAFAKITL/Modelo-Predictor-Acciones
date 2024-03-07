@@ -39,12 +39,10 @@ def upload():
         dataInPandas = arreglosToPandas(Fecha, Apertura, Alto, Bajo, Cierre, AdjCierre, Volumen)
         MediaSMA = calcularSMA(dataInPandas, 100)
         datosConRSI = calcularRSI(MediaSMA, 100)
-        arbolPrediccion = prediccionArbolesDecision(dataInPandas, 8.33)
-        SVMPrediccion = prediccionSVM(dataInPandas, 8)
         datosConRSI.to_json('.\static\datos.json', orient = 'records')
 
         # Realizar operaciones con los datos CSV aquí
-        return render_template('result.html', csv_data=csv_data, arbolPrediccion=arbolPrediccion, SVMPrediccion=SVMPrediccion)
+        return render_template('result.html', csv_data=csv_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
