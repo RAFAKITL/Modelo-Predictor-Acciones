@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictor del Precio de Acciones</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilo personalizado para el menú desplegable */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #123e6b;
+            /* Cambio de color a azul */
+            padding-top: 20px;
+            transition: left 0.3s ease-in-out;
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+
+            display: block;
+            background-color: #123e6b;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #8ab5e5;
+            /* Color de fondo al pasar el ratón */
+        }
+
+        .open-btn {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            cursor: pointer;
+            z-index: 0;
+            color: #000000;
+            /* Cambio de color del ícono */
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+            z-index: 999;
+            color:#fff;
+        }
+
+        .content {
+            margin-left: 50px;
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        .content.opened {
+            margin-left: 300px;
+        }
+
+        /* Margen inferior de 2px para las secciones */
+        .section {
+            margin-bottom: 2px;
+        }
+        .mas-info {
+        display: none;
+        margin-top: 10px;
+    }
+    .foto {
+        display: none;
+        margin-top: 10px;
+        max-width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar" id="sidebar">
+        <a href="#Inicio">Inicio</a>
+        <a href="#MasInformacion">Más Información</a>
+        <a href="#Contenido">Accioness</a>
+        <a href="#Contacto">Desarrolladores</a>
+        <span class="close-btn" onclick="closeNav()">&times;</span>
+    </div>
+
+    <div class="open-btn" onclick="openNav()" style="color: #494949;">&#9776;</div>
+
+    <div class="content">
+        <div id="Inicio" class="col-lg-12 bg-light py-5 section"  >
+            <div class="container" >
+                <div id="contpadre">
+                    <form id="DataCelex" method="post" action="#indwefinido">
+                        <div id="contheader">
+                            <div id="Bienbenida">
+                                <h1 class="text-center">Sistema Predictor del Precio de Acciones en la Bolsa de Valores
+                                </h1>
+                                <div id="Eslog" class="text-center" >
+                                    <h3 class="text-justify mb-5">Descubre cómo puedes invertir y gestionar tus activos financieros de manera
+                                        eficiente.</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="contbody">
+                            <div id="ContG" class="row md-6">
+                                <div id="info" class="col-md-6 text-justify">
+                                    <h1>Invertir en la bolsa de valores</h1>
+                                    <h3>Comprar una parte de una empresa (llamada acción) con la esperanza de que su
+                                        valor aumente con el tiempo.<br> </h3>
+                                    <h3>Básicamente, estás poniendo tu dinero en empresas que crees que tendrán éxito,
+                                        con la intención de obtener ganancias cuando el valor de esas acciones aumente y
+                                        puedas venderlas por más de lo que pagaste.</h3>
+                                </div>
+                                <div id="foto" class="col-md-6">
+                                    <img src="bolsa.jpg" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="contfooter">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="MasInformacion" class="col-lg-12 py-5 section" style="width: 97%; background-color: #3a6ea3; color :#fff" ><!--  style="background-color: #ffba6a;"-->
+            <div class="container">
+                <h2 class="text-center mb-5">Más información</h2>
+                <div id="informacion" class="oculto">
+                    <h2 class="text-center">MOMENTUM</h2>
+                    <p class="text-justify mb-4">Se refiere a la fuerza o impulso que tiene un activo financiero para seguir moviéndose en la
+                        misma dirección en la que ha estado moviéndose en el pasado reciente. En términos prácticos, los
+                        inversores utilizan indicadores de momentum para identificar qué activos están experimentando un
+                        aumento en su precio y cuáles están perdiendo fuerza. Esto puede ayudarles a tomar decisiones de
+                        compra o venta.</p>
+                    <h2 class="text-center">Media Móvil</h2>
+                    <p class="text-justify mb-4">Es un indicador técnico que suaviza el precio de un activo financiero al promediar sus valores
+                        durante un período de tiempo específico. Por ejemplo, una media móvil de 50 días calculará el
+                        promedio de los precios de cierre de los últimos 50 días de negociación. Las medias móviles se
+                        utilizan comúnmente para identificar la dirección de la tendencia de un activo y para filtrar el
+                        ruido del mercado.</p>
+                    <h2 class="text-center">Índice de Fuerza Relativa</h2>
+                    <p class="text-justify mb-4">Es un indicador de momentum que compara las ganancias recientes y las pérdidas recientes de un
+                        activo financiero para evaluar su velocidad y cambio de precio. El RSI generalmente se muestra
+                        en una escala de 0 a 100 y se utiliza para determinar si un activo está sobrecomprado o
+                        sobrevendido. Un RSI por encima de 70 generalmente sugiere que un activo está sobrecomprado y
+                        podría estar listo para una corrección a la baja, mientras que un RSI por debajo de 30 indica
+                        que un activo está sobrevendido y podría estar preparándose para un rebote al alza.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="Contenido" class="col-lg-12 bg- text-black py-5 section">
+            <div class="container">
+                <h1 class="text-center">Acciones</h1>
+                <p class="text-justify mb-4">
+                    Las 10 predicciones que se presentan a continuación son una guía sólida y ponderada para 
+                    los inversores que buscan comprender las dinámicas del mercado y anticipar sus movimientos
+                    futuros. Desde la consolidación sectorial hasta los cambios regulatorios, estas predicciones 
+                    ofrecen una visión seria y reflexiva sobre los factores que influirán en la evolución del
+                    mercado en los próximos períodos. Con esta información estratégica, los inversores pueden 
+                    tomar decisiones fundamentadas y adaptar sus carteras para enfrentar los desafíos y 
+                    capitalizar las oportunidades en un mercado financiero en constante transformación.
+                </p>
+                <div class="container">
+                    <div class="row">
+                        <!-- Tarjetas de imágenes -->
+                        {% for i in range(1, 11) %}
+                        <div class="col-md-3 mb-3">
+                            <div class="card" data-toggle="modal" data-target="#exampleModal{{ i }}">
+                                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Imagen {{ i }}">
+                                <div class="card-body" style="background-color: #3a6ea3; color:#fff;">
+                                    <h5 class="card-title">Imagen {{ i }}</h5>
+                                    <p class="card-text">Descripción de la imagen {{ i }}</p>
+                                    <p class="card-text">Información adicional de la imagen {{ i }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+        
+                <!-- Modales -->
+                {% for i in range(1, 11) %}
+                <div class="modal fade" id="exampleModal{{ i }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{ i }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel{{ i }}">Imagen Ampliada {{ i }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <div id="Grafico{{ i }}"></div> <!-- Div for the chart -->
+                                <div class="image-info">
+                                    <h5>Información adicional:</h5>
+                                    <p>Información detallada sobre la imagen seleccionada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="Contacto" class="col-lg-12 py-5 section"><!--  style="background-color: #ffba6a;"-->
+            <div class="container">
+                <h1 class="text-center text-black mb-4">Desarrolladores</h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card persona" onclick="mostrarInfo('desarrollador1')">
+                            <div class="card-body">
+                                <h2 class="card-title">Jesús Rafael</h2>
+                                <div id="desarrollador1-info" class="mas-info">
+                                    <p>Información detallada del Desarrollador 1:</p>
+                                    <ul>
+                                        <li>Nombre: Jesús Rafael</li>
+                                        <li>Edad: 30 años</li>
+                                        <li>Experiencia: 5 años en desarrollo web</li>
+                                    </ul>
+                                    <img src="desarrollador1.jpg" alt="Foto Desarrollador 1" class="foto">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-6">
+                        <div class="card persona" onclick="mostrarInfo('desarrollador2')">
+                            <div class="card-body">
+                                <h2 class="card-title">Alejandro</h2>
+                                <div id="desarrollador2-info" class="mas-info">
+                                    <p>Información detallada del Desarrollador 2:</p>
+                                    <ul>
+                                        <li>Nombre: Alejandro Ortiz Camarena</li>
+                                        <li>Edad: 23 años</li>
+                                        <li>Tecnico en Programacón</li>
+                                    </ul>
+                                    <img src="desarrollador2.jpg" alt="Foto Desarrollador 2" class="foto">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="row mt-4">
+                    <div class="col-md-12" id="ice-info">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Carrera de Ingeniería en Comunicaciones y Electrónica (ICE) - IPN</h2>
+                                <p class="card-text text-justify mb-4">La carrera de Ingeniería en Comunicaciones y Electrónica (ICE) en la Escuela Superior de Ingeniería Mecánica y Eléctrica (ESIME) Zacatenco es una opción académica que combina conocimientos en áreas como la electrónica, las comunicaciones, la informática y la tecnología de redes. Esta carrera se enfoca en formar profesionales capaces de diseñar, implementar y gestionar sistemas de comunicaciones y electrónica en diversos campos, incluyendo las telecomunicaciones, la industria, la medicina, entre otros.
+                                    <br>Los planes de estudio de la carrera suelen abarcar materias como electrónica analógica y digital, sistemas de comunicaciones, redes de datos, procesamiento de señales, microprocesadores, entre otros temas relacionados. Además, los estudiantes suelen realizar proyectos prácticos y tener la oportunidad de participar en actividades extracurriculares como concursos, conferencias y proyectos de investigación.
+                                    <br>La ESIME Zacatenco, perteneciente al Instituto Politécnico Nacional (IPN) en México, es reconocida por su excelencia académica en ingeniería y tecnología, y ofrece una sólida formación en este campo a través de su programa de Ingeniería en Comunicaciones y Electrónica.</p>
+                                <img src="logo_ipn.png" alt="Logo IPN" style="max-width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery y Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="static/GraficarAccionMediasMoviles.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.modal').on('shown.bs.modal', function (e) {
+                var id = $(this).attr('id').replace('exampleModal', 'Grafico');
+                GraficarAccionMediasMoviles('#' + id); // Call the function with the appropriate div ID
+            });
+        });
+    </script>
+    <script>
+        function openNav() {
+            document.getElementById("sidebar").style.left = "0";
+            document.querySelector('.content').classList.add('opened');
+        }
+
+        function closeNav() {
+            document.getElementById("sidebar").style.left = "-250px";
+            document.querySelector('.content').classList.remove('opened');
+        }
+        function mostrarInfo(desarrollador) {
+    var info = document.getElementById(desarrollador + "-info");
+    var foto = document.querySelector("." + desarrollador + " .foto");
+    if (info.style.display === "none") {
+        info.style.display = "block";
+        foto.style.display = "block";
+    } else {
+        info.style.display = "none";
+        foto.style.display = "none";
+    }
+}
+    </script>
+
+</body>
+
+</html>

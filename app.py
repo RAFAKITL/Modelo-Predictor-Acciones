@@ -1,7 +1,11 @@
+import os
+import pandas as pd
+import json
+from flask import Flask, render_template, jsonify
+import subprocess
+from ProduccionV2 import modeloSerieTemporal  # Asegúrate de importar correctamente tu función
 from flask import Flask, render_template, request
 import csv
-from PromedioGlobalClose import promediar
-from Graficar import generarGrafico
 from listToPandas import listToArreglo, arreglosToPandas
 from MediasMoviles import calcularSMA, calcularRSI
 import pandas as pd
@@ -9,40 +13,51 @@ import matplotlib.pyplot as plt
 from AprendizajeAutomatico import prediccionArbolesDecision
 from AprendizajeAutomatico import prediccionSVM
 
+
 app = Flask(__name__)
+ACCIONES_FOLDER = 'Modelo-Predictor-Acciones\static\Acciones'
+
+def ejecutar_descarga():
+    # Ejecutar el script de descarga
+    subprocess.run(["python", "Modelo-Predictor-Acciones\DescargaArchivos.py"], check=True)
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def procesar():
 
-@app.route('/upload', methods=['POST'])
-def upload():
-    if 'file' not in request.files:
-        return 'No se ha proporcionado ningún archivo'
+    ejecutar_descarga()
+    archivos = [f for f in os.listdir(ACCIONES_FOLDER) if f.endswith('.csv')]
+    archivos.sort()
+    resultados = []
 
-    file = request.files['file']
-    if file.filename == '':
-        return 'No se ha seleccionado ningún archivo'
+    acciones = ["AAPL", "AZN", "BBVA", "BIMBOA.MX", "C", "CEMEXCPO.MX", "CVX", "NVDA", "KOFUBL.MX", "TSLA"]
+    contadorAcción = 0
+    for archivo in archivos:
+        ruta_archivo = os.path.join(ACCIONES_FOLDER, archivo)
+        rutaJSON = "Modelo-Predictor-Acciones\static\AccionesJSON\datos" + acciones[contadorAcción] + ".json"
+        df = pd.read_csv(ruta_archivo, parse_dates=['Date'], dayfirst=True)  # Leer el CSV como DataFrame de pandas
+        
+        # Procesar el archivo usando modeloSerieTemporal
+        ultimo_cierre, prediccion, serie_original, serie_modificada = modeloSerieTemporal(df, 1)
+        df.to_json(rutaJSON, orient = 'records', date_format='iso')
 
-    if file:
-        data = file.read().decode('utf-8').splitlines()
-        csv_data = list(csv.reader(data))
-
-        Fecha = listToArreglo(csv_data, 0)
-        Apertura = listToArreglo(csv_data, 1)
-        Alto = listToArreglo(csv_data, 2)
-        Bajo = listToArreglo(csv_data, 3)
-        Cierre = listToArreglo(csv_data, 4)
-        AdjCierre = listToArreglo(csv_data, 5)
-        Volumen = listToArreglo(csv_data, 6)
-
-        dataInPandas = arreglosToPandas(Fecha, Apertura, Alto, Bajo, Cierre, AdjCierre, Volumen)
-        MediaSMA = calcularSMA(dataInPandas, 100)
-        datosConRSI = calcularRSI(MediaSMA, 100)
-        datosConRSI.to_json('.\static\datos.json', orient = 'records')
-
-        # Realizar operaciones con los datos CSV aquí
-        return render_template('result.html', csv_data=csv_data)
+        if prediccion.values[0] > ultimo_cierre.values[0]:
+            verde = True
+        else:
+            verde = False
+            
+        # Almacenar los resultados
+        resultados.append({
+            'archivo': archivo,
+            'ultimo_cierre': ultimo_cierre.values[0],
+            'prediccion': prediccion.values[0],
+            'serie_original': serie_original,  # Convertir series a listas para JSON
+            'serie_modificada': serie_modificada,
+            'sube': verde
+        })
+        contadorAcción +=1
+    
+    # Pasar los resultados al template
+    return render_template('index.html', resultados=resultados)
 
 if __name__ == '__main__':
     app.run(debug=True)

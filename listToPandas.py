@@ -1,10 +1,15 @@
 import pandas as pd
 
 
-def listToArreglo(Lista, columnaIndex):
+def listToArreglo(Lista, columnaIndex, numero):
     arregloColumna = []
-    for row in Lista[1:]:
-        arregloColumna.append(row[columnaIndex])
+    if numero == True:
+        for row in Lista[1:]:
+            arregloColumna.append(float(row[columnaIndex]))
+
+    else:
+        for row in Lista[1:]:
+            arregloColumna.append(row[columnaIndex])
 
     return arregloColumna
 

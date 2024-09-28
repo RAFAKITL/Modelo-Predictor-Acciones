@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del Modelo de Serie Temporal</title>
+</head>
+<body>
+    <h1>Resultados del Modelo de Serie Temporal</h1>
+    {% for resultado in resultados %}
+        <div>
+            <h2>{{ resultado.archivo }}</h2>
+            <p><strong>Último Cierre:</strong> {{ resultado.ultimo_cierre }}</p>
+            <p><strong>Predicción:</strong> {{ resultado.prediccion }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>
